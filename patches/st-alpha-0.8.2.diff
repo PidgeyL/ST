@@ -46,11 +46,12 @@ diff --git a/st.h b/st.h
 index 38c61c4..b7634ab 100644
 --- a/st.h
 +++ b/st.h
-@@ -120,3 +120,4 @@ extern char *termname;
+@@ -129,4 +129,5 @@ extern char *termname;
  extern unsigned int tabspaces;
  extern unsigned int defaultfg;
  extern unsigned int defaultbg;
 +extern float alpha;
+ extern MouseKey mkeys[];
 diff --git a/x.c b/x.c
 index 0422421..588dec3 100644
 --- a/x.c
