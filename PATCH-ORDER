@@ -2,3 +2,5 @@ patches/st-scrollback-complete-0.8.2.diff
 patches/st-alpha-0.8.2.diff
 patches/st-externalpipe-0.8.2.diff
 patches/st-clipboard-0.8.2.diff
+patches/st-keyboard_select-0.8.2.diff
+patches/st-boxdraw_v2-0.8.2.diff
