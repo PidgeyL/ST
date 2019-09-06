@@ -9,6 +9,12 @@ static char *font = "Liberation Mono:pixelsize=14:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
+ * Custom commands
+ */
+static char *openurlcmd[] = { "/bin/sh", "-c", "linkgrep", "externalpipe", NULL };
+
+
+/*
  * What program is execed by st depends of these precedence rules:
  * 1: program passed with -e
  * 2: utmp option
@@ -240,6 +246,7 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ TERMMOD,              XK_Escape,      keyboard_select,{ 0 } },
+	{ TERMMOD,              XK_U,           externalpipe,   {.v = openurlcmd } },
 };
 
 /*
