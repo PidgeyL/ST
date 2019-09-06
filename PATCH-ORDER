@@ -4,3 +4,4 @@ patches/st-externalpipe-0.8.2.diff
 patches/st-clipboard-0.8.2.diff
 patches/st-keyboard_select-0.8.2.diff
 patches/st-boxdraw_v2-0.8.2.diff
+patches/st-vertcenter-20180320-(custom).diff
