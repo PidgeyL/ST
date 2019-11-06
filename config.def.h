@@ -245,7 +245,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_J,           kscrolldown,    {.i = -1} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ TERMMOD,              XK_Escape,      keyboard_select,{ 0 } },
+	{ TERMMOD,              XK_S,           keyboard_select,{ 0 } },
 	{ TERMMOD,              XK_U,           externalpipe,   {.v = openurlcmd } },
 };
 
