@@ -1,0 +1,75 @@
+diff --git a/config.def.h b/config.def.h
+index c40e143..5b9b127 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -247,6 +247,7 @@ static Shortcut shortcuts[] = {
+ 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+ 	{ TERMMOD,              XK_S,           keyboard_select,{ 0 } },
+ 	{ TERMMOD,              XK_U,           externalpipe,   {.v = openurlcmd } },
++        { TERMMOD,              XK_Return,      newterm,        {.i =  0} },
+ };
+ 
+ /*
+diff --git a/config.mk b/config.mk
+index 1d2f0e2..9558a71 100644
+--- a/config.mk
++++ b/config.mk
+@@ -1,5 +1,5 @@
+ # st version
+-VERSION = 0.8.2
++VERSION = 0.8.2-PidgeyPatch_0.2
+ 
+ # Customize below to fit your system
+ 
+diff --git a/st.c b/st.c
+index 8a4723e..99a07b8 100644
+--- a/st.c
++++ b/st.c
+@@ -162,6 +162,7 @@ typedef struct {
+ } STREscape;
+ 
+ static void execsh(char *, char **);
++static char *getcwd_by_pid(pid_t pid);
+ static void stty(char **);
+ static void sigchld(int);
+ static void ttywriteraw(const char *, size_t);
+@@ -1070,6 +1071,27 @@ tswapscreen(void)
+ 	term.mode ^= MODE_ALTSCREEN;
+ 	tfulldirt();
+ }
++
++void
++newterm(const Arg* a)
++{
++       switch (fork()) {
++       case -1:
++               die("fork failed: %s\n", strerror(errno));
++               break;
++       case 0:
++               chdir(getcwd_by_pid(pid));
++               execlp("st", "./st", NULL);
++               break;
++       }
++}
++
++static char *getcwd_by_pid(pid_t pid) {
++       char buf[32];
++       snprintf(buf, sizeof buf, "/proc/%d/cwd", pid);
++       return realpath(buf, NULL);
++}
++
+ void
+ kscrolldown(const Arg* a)
+ {
+diff --git a/st.h b/st.h
+index 6c2da4e..9040982 100644
+--- a/st.h
++++ b/st.h
+@@ -88,6 +88,7 @@ void die(const char *, ...);
+ void redraw(void);
+ void draw(void);
+ 
++void newterm(const Arg *);
+ void kscrolldown(const Arg *);
+ void kscrollup(const Arg *);
+ void externalpipe(const Arg *);
